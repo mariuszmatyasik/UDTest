@@ -1,0 +1,40 @@
+﻿<Window x:Class="UDTest.TestFrame"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UDTest"
+        mc:Ignorable="d"
+        Title="TestFrame" Height="450" Width="800" Background="AliceBlue" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
+    <Border Padding="5">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="question_label" Grid.Column="0" Text="Question" FontSize="15" FontWeight="Bold" TextWrapping="WrapWithOverflow" />
+                <StackPanel Grid.Column="0" Margin="0,80,0,0">
+                    <TextBlock x:Name="answer1" Text="Answer 1" Margin="0 15" FontSize="15" TextWrapping="WrapWithOverflow" />
+                    <TextBlock x:Name="answer2" Text="Answer 2" Margin="0 15" FontSize="15" TextWrapping="WrapWithOverflow" />
+                    <TextBlock x:Name="answer3" Text="Answer 3" Margin="0 15" FontSize="15" TextWrapping="WrapWithOverflow" />
+                    <TextBlock x:Name="answer4" Text="Answer 4" Margin="0 15" FontSize="15" TextWrapping="WrapWithOverflow" />
+                </StackPanel>
+
+                <Image x:Name="imgb_64" Grid.Column="1" Margin="5,0,0,0" />
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0" >
+                    <Button x:Name="next_question" Content="Następne pytanie" Margin="30,50,30,0" />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Window>
