@@ -57,7 +57,6 @@ namespace UDTest
                     //  Now parse with JSON.Net
                     testListModelArray = JArray.Parse(json);
 
-
                     IList<Testlist> listModel = testListModelArray.Select(p => new Testlist
                     {
                         name = (string)p["name"],
@@ -84,7 +83,6 @@ namespace UDTest
 
                 Testlist newItem = new Testlist
                 {
-                    Id = testlists.Count + 1,
                     name = testList[0].name,
                     description = testList[0].description,
                     questionPool = testList[0].questionPool,
@@ -93,7 +91,7 @@ namespace UDTest
                     time = testList[0].time
                 };
             
-
+            // Deleting entities from actual database
             using (var db = new TestlistDBEntities())
             {
                 var objCtx = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext;
@@ -102,6 +100,7 @@ namespace UDTest
                 db.Dispose();
             }
 
+            // Adding newly parsed entities to database
             using (var db = new TestlistDBEntities())
             {
                 db.Testlists.Add(newItem);
@@ -115,6 +114,11 @@ namespace UDTest
 
         private void btn_start_test_Click(object sender, RoutedEventArgs e)
         {
+            if (listBox.SelectedItem == null)
+            {
+                MessageBox.Show("Proszę wybrać test!");
+                return;
+            }
             var newFrame = new TestFrame(this);
             newFrame.Show();
             this.Hide();
@@ -131,6 +135,14 @@ namespace UDTest
                 a_limit.Content = selected.answersLimit.ToString();
                 threshold_nr.Content = selected.threshold.ToString() + "/" + selected.questionPool;
                 time_nr.Content = (selected.time / 60).ToString() + " minut";
+            }
+            else if (selected == null)
+            {
+                description_label.Text = "";
+                q_pool.Content = "";
+                a_limit.Content = "";
+                threshold_nr.Content = "";
+                time_nr.Content = "";
             }
             else return;
         }

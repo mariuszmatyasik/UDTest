@@ -103,6 +103,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Answers_Table.cs">
+      <DependentUpon>TestDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Answer_Values.cs">
+      <DependentUpon>TestDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Question_Table.cs">
+      <DependentUpon>TestDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestDBModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="TestFrame.xaml.cs">
       <DependentUpon>TestFrame.xaml</DependentUpon>
     </Compile>
@@ -168,6 +192,13 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TestlistDBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="TestDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TestDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="TestDBModel.edmx.diagram">
+      <DependentUpon>TestDBModel.edmx</DependentUpon>
+    </None>
     <None Include="TestlistDBModel.edmx.diagram">
       <DependentUpon>TestlistDBModel.edmx</DependentUpon>
     </None>
@@ -176,6 +207,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TestDBModel.edmx</DependentUpon>
+      <LastGenOutput>TestDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="TestDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TestDBModel.edmx</DependentUpon>
+      <LastGenOutput>TestDBModel.cs</LastGenOutput>
+    </Content>
     <Content Include="TestlistDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TestlistDBModel.edmx</DependentUpon>
@@ -190,7 +231,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
