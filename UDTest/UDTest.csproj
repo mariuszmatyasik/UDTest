@@ -188,10 +188,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <EntityDeploy Include="TestlistDBModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TestlistDBModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <EntityDeploy Include="TestDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TestDBModel.Designer.cs</LastGenOutput>
@@ -199,6 +195,10 @@
     <None Include="TestDBModel.edmx.diagram">
       <DependentUpon>TestDBModel.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="TestlistDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TestlistDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="TestlistDBModel.edmx.diagram">
       <DependentUpon>TestlistDBModel.edmx</DependentUpon>
     </None>

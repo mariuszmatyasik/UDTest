@@ -17,9 +17,10 @@ namespace UDTest
         public long Id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public long questionPool { get; set; }
-        public long answersLimit { get; set; }
+        public long question_pool { get; set; }
+        public long answers_limit { get; set; }
         public long threshold { get; set; }
         public long time { get; set; }
+        public string url { get; set; }
     }
 }

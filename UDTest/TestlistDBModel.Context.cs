@@ -13,10 +13,10 @@ namespace UDTest
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TestlistDBEntities : DbContext
+    public partial class TestlistDBEnt : DbContext
     {
-        public TestlistDBEntities()
-            : base("name=TestlistDBEntities")
+        public TestlistDBEnt()
+            : base("name=TestlistDBEnt")
         {
         }
     

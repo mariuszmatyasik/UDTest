@@ -8,11 +8,12 @@ namespace UDTest
     public partial class TestFrame : Window
     {
         MainWindow tmp = new MainWindow();
-
-        public TestFrame(MainWindow tmp)
+        string url;
+        public TestFrame(MainWindow tmp, string url)
         {
             InitializeComponent();
             this.tmp = tmp;
+            this.url = url;
         }
 
         private void Window_Closed(object sender, System.EventArgs e)

@@ -30,7 +30,7 @@ namespace UDTest
 
         public static async Task FetchData()
         {
-            using (var db = new TestlistDBEntities())
+            using (var db = new TestlistDBEnt())
             {
                 testlists = await (from name in db.Testlists select name).ToListAsync();
                 db.Dispose();
@@ -50,6 +50,7 @@ namespace UDTest
         public async Task<IList<Testlist>> UpdateList()
         {
             IList<Testlist> lModel = new List<Testlist>();
+
             using (var httpClient = new HttpClient())
                 try
                 {
@@ -59,10 +60,11 @@ namespace UDTest
 
                     IList<Testlist> listModel = testListModelArray.Select(p => new Testlist
                     {
+                        url = (string)p["url"],
                         name = (string)p["name"],
                         description = (string)p["description"],
-                        questionPool = (int)p["question-pool"],
-                        answersLimit = (int)p["answers-limit"],
+                        question_pool = (int)p["question-pool"],
+                        answers_limit = (int)p["answers-limit"],
                         threshold = (int)p["threshold"],
                         time = (int)p["time"]
                     }).ToList();
@@ -83,16 +85,18 @@ namespace UDTest
 
                 Testlist newItem = new Testlist
                 {
+                    Id = testList[0].Id,
                     name = testList[0].name,
                     description = testList[0].description,
-                    questionPool = testList[0].questionPool,
-                    answersLimit = testList[0].answersLimit,
+                    question_pool = testList[0].question_pool,
+                    answers_limit = testList[0].answers_limit,
                     threshold = testList[0].threshold,
-                    time = testList[0].time
+                    time = testList[0].time,
+                    url = testList[0].url
                 };
             
             // Deleting entities from actual database
-            using (var db = new TestlistDBEntities())
+            using (var db = new TestlistDBEnt())
             {
                 var objCtx = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext;
                 objCtx.ExecuteStoreCommand("DELETE FROM [Testlist]");
@@ -101,7 +105,7 @@ namespace UDTest
             }
 
             // Adding newly parsed entities to database
-            using (var db = new TestlistDBEntities())
+            using (var db = new TestlistDBEnt())
             {
                 db.Testlists.Add(newItem);
                 await db.SaveChangesAsync();
@@ -119,7 +123,11 @@ namespace UDTest
                 MessageBox.Show("Proszę wybrać test!");
                 return;
             }
-            var newFrame = new TestFrame(this);
+
+            Testlist selectedUrl = listBox.SelectedItem as Testlist;
+            string url = selectedUrl.url.ToString();
+
+            var newFrame = new TestFrame(this, url);
             newFrame.Show();
             this.Hide();
         }
@@ -131,9 +139,9 @@ namespace UDTest
             if (selected != null)
             {
                 description_label.Text = selected.description.ToString();
-                q_pool.Content = selected.questionPool.ToString();
-                a_limit.Content = selected.answersLimit.ToString();
-                threshold_nr.Content = selected.threshold.ToString() + "/" + selected.questionPool;
+                q_pool.Content = selected.question_pool.ToString();
+                a_limit.Content = selected.answers_limit.ToString();
+                threshold_nr.Content = selected.threshold.ToString() + "/" + selected.question_pool;
                 time_nr.Content = (selected.time / 60).ToString() + " minut";
             }
             else if (selected == null)

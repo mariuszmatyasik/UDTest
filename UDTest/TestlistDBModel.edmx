@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="mainModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\Users\mariu\source\c#_repos\UDTest\TestlistDB.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Testlists.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=C:\Users\mariu\source\c#_repos\UDTest\TestlistDB.db;version=3" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Testlist">
           <Key>
             <PropertyRef Name="Id" />
@@ -12,19 +12,20 @@
           <Property Name="Id" Type="integer" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
-          <Property Name="questionPool" Type="integer" Nullable="false" />
-          <Property Name="answersLimit" Type="integer" Nullable="false" />
+          <Property Name="question_pool" Type="integer" Nullable="false" />
+          <Property Name="answers_limit" Type="integer" Nullable="false" />
           <Property Name="threshold" Type="integer" Nullable="false" />
           <Property Name="time" Type="integer" Nullable="false" />
+          <Property Name="url" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="mainModelStoreContainer">
+        <EntityContainer Name="TestlistsStoreContainer">
           <EntitySet Name="Testlist" EntityType="Self.Testlist" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="mainModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Testlists" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Testlist">
           <Key>
             <PropertyRef Name="Id" />
@@ -32,30 +33,32 @@
           <Property Name="Id" Type="Int64" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="description" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="questionPool" Type="Int64" Nullable="false" />
-          <Property Name="answersLimit" Type="Int64" Nullable="false" />
+          <Property Name="question_pool" Type="Int64" Nullable="false" />
+          <Property Name="answers_limit" Type="Int64" Nullable="false" />
           <Property Name="threshold" Type="Int64" Nullable="false" />
           <Property Name="time" Type="Int64" Nullable="false" />
+          <Property Name="url" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="TestlistDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Testlists" EntityType="Self.Testlist" />
+        <EntityContainer Name="TestlistDBEnt" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Testlist" EntityType="Self.Testlist" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="mainModelStoreContainer" CdmEntityContainer="TestlistDBEntities">
-          <EntitySetMapping Name="Testlists">
-            <EntityTypeMapping TypeName="mainModel.Testlist">
+        <EntityContainerMapping StorageEntityContainer="TestlistsStoreContainer" CdmEntityContainer="TestlistDBEnt">
+          <EntitySetMapping Name="Testlist">
+            <EntityTypeMapping TypeName="Testlists.Testlist">
               <MappingFragment StoreEntitySet="Testlist">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="questionPool" ColumnName="questionPool" />
-                <ScalarProperty Name="answersLimit" ColumnName="answersLimit" />
+                <ScalarProperty Name="question_pool" ColumnName="question_pool" />
+                <ScalarProperty Name="answers_limit" ColumnName="answers_limit" />
                 <ScalarProperty Name="threshold" ColumnName="threshold" />
                 <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="url" ColumnName="url" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -73,7 +76,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
